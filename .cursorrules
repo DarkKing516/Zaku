@@ -1,0 +1,5 @@
+- Usa TypeScript strict y evita any.
+- Mantén DTOs separadas de entities.
+- Asegura tenant isolation en cada query o acceso a datos.
+- Usa envelope global { success, data, error }.
+- No uses synchronize=true; usa migrations.
