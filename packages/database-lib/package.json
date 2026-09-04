@@ -1,0 +1,24 @@
+{
+  "name": "@zaku/database-lib",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "pnpm typecheck",
+    "test": "echo 'No tests in database-lib'",
+    "migration:run": "pnpm build && typeorm -d dist/data-source.js migration:run"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.25"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "pg": "^8.12.0",
+    "ts-node": "^10.9.2",
+    "typeorm-ts-node-commonjs": "^0.3.20"
+  }
+}
