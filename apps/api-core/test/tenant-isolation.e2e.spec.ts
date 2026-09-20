@@ -2,8 +2,8 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { GlobalExceptionFilter } from '../src/common/global-exception.filter';
-import { ResponseInterceptor } from '../src/common/response.interceptor';
+import { GlobalExceptionFilter } from '../src/common/filters/global-exception.filter';
+import { ResponseInterceptor } from '../src/common/interceptors/response.interceptor';
 
 describe('Tenant Isolation (E2E)', () => {
   let app: INestApplication;

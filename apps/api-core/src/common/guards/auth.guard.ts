@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
-import { tenantContext } from '../tenant/tenant-context';
-import { AuthService } from './auth.service';
+import { tenantContext } from '../../modules/tenant/utils/tenant-context';
+import { AuthService } from '../../modules/auth/services/auth.service';
 
 interface AuthenticatedRequest extends Request {
   user?: {

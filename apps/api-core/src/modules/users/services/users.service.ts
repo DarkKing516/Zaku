@@ -1,8 +1,8 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { tenantContext } from '../tenant/tenant-context';
-import { AuthService } from '../auth/auth.service';
-import { CreateUserDto } from './create-user.dto';
+import { tenantContext } from '../../tenant/utils/tenant-context';
+import { AuthService } from '../../auth/services/auth.service';
+import { CreateUserDto } from '../dtos/create-user.dto';
 
 interface UserRecord {
   id: string;

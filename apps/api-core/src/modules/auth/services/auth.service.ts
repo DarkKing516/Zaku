@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
-import { LoginDto } from './login.dto';
+import { LoginDto } from '../dtos/login.dto';
 
 interface AccountRecord {
   id: string;

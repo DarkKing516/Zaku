@@ -1,17 +1,23 @@
-import 'antd/dist/reset.css';
-import './globals.css';
+import '@/css/light-globals.css';
 import type { Metadata } from 'next';
-import { ReactNode } from 'react';
+import React from 'react';
+import Providers from '@/components/providers/Providers';
+import { AppEnvBadge } from '@/components/core/AppEnvBadge';
 
 export const metadata: Metadata = {
-  title: 'Zaku Web Core',
-  description: 'Enterprise multi-tenant frontend shell',
+  title: 'Zaku Enterprise Platform',
+  description: 'Enterprise multi-tenant platform',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="es">
+      <body className="bg-zinc-50 text-zinc-900" suppressHydrationWarning={true}>
+        <Providers>
+          {children}
+          <AppEnvBadge />
+        </Providers>
+      </body>
     </html>
   );
 }
