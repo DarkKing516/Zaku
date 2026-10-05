@@ -5,9 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "pnpm clean && tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "pnpm typecheck",
-    "test": "echo 'No tests in shared-types'"
+    "test": "echo 'No tests in shared-types'",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   }
 }

@@ -1,5 +1,8 @@
-- Usa TypeScript strict y evita any.
-- Mantén DTOs separadas de entities.
-- Asegura tenant isolation en cada query o acceso a datos.
-- Usa envelope global { success, data, error }.
-- No uses synchronize=true; usa migrations.
+Sigue docs/AI_RULES.md (obligatorio para todo el monorepo) y, según la app que toques, apps/api-core/docs/AI_RULES.md o apps/web-core/docs/AI_RULES.md (también obligatorios). El índice de toda la documentación es docs/README.md.
+- Documentación: lo general del monorepo va en docs/; lo de una sola app, en apps/<app>/docs/ (enlazado desde su README.md).
+- Ninguna app importa otra app: se comunican por HTTP y comparten solo packages/*. Contrato HTTP en packages/shared-types.
+- TypeScript strict, sin any, sin console en src/, process.env solo en el lector de entorno de cada app (excepciones: scripts CLI de apps/*/scripts y packages/database-lib/src/scripts, que también pueden usar console, y el setup de los tests).
+- Tests unitarios obligatorios y siempre en test/ (nunca en un src/); test/unit es espejo de src/ y si mueves un archivo mueves su spec. Antes de terminar: pnpm run ci.
+- api-core: hexagonal + CQRS-lite por módulo; controllers solo despachan por CommandBus/QueryBus; commands/queries extienden Command<T>/Query<T>. core/ = infraestructura global de Nest; common/ = TypeScript puro; modules/ = negocio; core y common nunca importan modules. Otro módulo solo por @modules/<x> (su index.ts); excepciones: src/app.module.ts y tests. Sin synchronize: true; process.env solo en core/config. Una DB por tenant; tenantId explícito en commands, queries y ports de datos de tenant; datos sensibles como Secret. I/O externo por port + provideSwitchableAdapter + mock + suite de contrato en test/contracts. Envelope de respuesta y errores (AppError con code + category) son globales; nunca se construyen a mano. Si tocaste persistencia o Redis: pnpm --filter api-core test:integration.
+- web-core: capas app → layout → modules → shared; app/ solo tiene archivos de rutas; Server Components por defecto y 'use client' mínimo; el navegador solo llama a /api/* (privateBff/publicBff); import 'server-only' en todo server/ (salvo archivos que son una sola línea export type { … } from '…'); services con las dos ramas mock y real; sin NEXT_PUBLIC_.
+- Sin comentarios explicativos ni docstrings de relleno. Commits convencionales y concisos.

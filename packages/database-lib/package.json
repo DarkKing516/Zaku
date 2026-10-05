@@ -5,20 +5,28 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "pnpm clean && tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "pnpm typecheck",
-    "test": "echo 'No tests in database-lib'",
-    "migration:run": "pnpm build && typeorm -d dist/data-source.js migration:run"
+    "test": "jest",
+    "db:control:create": "pnpm build && node dist/scripts/ensure-control-database.js",
+    "migration:run:control": "pnpm build && typeorm -d dist/control-plane/data-source.js migration:run",
+    "migration:run:tenants": "pnpm build && node dist/scripts/migrate-tenant-databases.js",
+    "migration:run": "pnpm db:control:create && pnpm migration:run:control && pnpm migration:run:tenants",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   },
   "dependencies": {
-    "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.25"
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/node": "^22.15.21",
+    "jest": "^29.7.0",
     "pg": "^8.12.0",
-    "ts-node": "^10.9.2",
-    "typeorm-ts-node-commonjs": "^0.3.20"
+    "ts-jest": "^29.2.5",
+    "typeorm": "^0.3.25"
+  },
+  "peerDependencies": {
+    "typeorm": "^0.3.25"
   }
 }

@@ -1,5 +1,3 @@
-export * from './base.entity';
-export * from './data-source';
-export * from './entities/user.entity';
-export * from './tenant-aware.repository';
-export * from './tenant-context';
+export { controlPlaneMigrations } from './control-plane/migrations';
+export { tenantMigrations } from './tenant/migrations';
+export { isTenantDatabaseName, tenantDatabaseNameFor } from './tenant/tenant-database-name';

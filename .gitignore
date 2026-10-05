@@ -5,3 +5,6 @@ dist
 coverage
 .next
 .env
+.env.local
+.env.*.local
+*.tsbuildinfo

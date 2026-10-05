@@ -3,18 +3,18 @@
   "private": true,
   "packageManager": "pnpm@9.1.0",
   "engines": {
-    "node": ">=18.17.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "turbo run dev --parallel",
+    "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "infra:up": "docker compose -f infra/docker-compose.yml up -d",
     "infra:down": "docker compose -f infra/docker-compose.yml down",
-    "db:migration:run": "cd packages/database-lib && pnpm migration:run",
-    "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+    "db:migration:run": "pnpm --filter @zaku/database-lib migration:run",
+    "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm --filter api-core test:cov && pnpm build && pnpm --filter api-core smoke"
   },
   "devDependencies": {
     "turbo": "^2.0.3",

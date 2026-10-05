@@ -1,24 +1,29 @@
 # Zaku Enterprise Monorepo
 
-Monorepo multi-tenant con pnpm + Turborepo + NestJS + Next.js + TypeORM.
+Plataforma multi-tenant: pnpm + Turborepo, NestJS (hexagonal + CQRS-lite), Next.js 16 (Server Components + BFF), TypeORM/PostgreSQL y Redis.
 
-## Requisitos
-- Node 18.17.0+
-- pnpm 9.1.0
+**Toda la documentación empieza en [docs/README.md](docs/README.md)**: qué es cada app y cada paquete, por dónde empezar según tu rol y el enlace a la documentación propia de cada app.
 
-## Estructura
-- `apps/api-core`: API NestJS
-- `apps/web-core`: Frontend Next.js
-- `apps/mobile-app`: Placeholder
-- `packages/shared-types`: tipos compartidos
-- `packages/database-lib`: TypeORM, entities y migrations
+## Inicio rápido
 
-## Comandos
-- `pnpm install`
-- `pnpm infra:up`
-- `pnpm db:migration:run`
-- `pnpm dev`
-- `pnpm test`
-- `pnpm build`
-- `pnpm lint`
-- `pnpm typecheck`
+Requisitos: Node 22.12+ y pnpm 9.1 (Docker solo si trabajas con bases de datos reales).
+
+```bash
+pnpm install
+```
+
+```bash
+pnpm build
+```
+
+```bash
+pnpm dev
+```
+
+Antes de `pnpm dev`, cada app necesita su archivo de entorno (`apps/api-core/.env` y `apps/web-core/.env.local`). Los pasos, los modos (mock o real) y todos los comandos de la raíz están en [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+
+Antes de abrir un PR:
+
+```bash
+pnpm run ci
+```

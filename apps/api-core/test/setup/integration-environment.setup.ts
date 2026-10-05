@@ -1,0 +1,9 @@
+process.env.NODE_ENV = 'test';
+process.env.MOCK_ADAPTERS = '';
+process.env.MOCK_SEED_DATA = 'false';
+process.env.JWT_SECRET = 'integration-test-secret-with-enough-length';
+process.env.TENANT_STATUS_CACHE_TTL_MS = '0';
+process.env.RATE_LIMIT_MAX_REQUESTS = '100000';
+process.env.RATE_LIMIT_CREDENTIALS_MAX_REQUESTS = '100000';
+process.env.RATE_LIMIT_CREDENTIALS_PER_IP_MAX_REQUESTS = '100000';
+process.env.CONTROL_DATABASE_NAME = process.env.CONTROL_DATABASE_NAME ?? 'zaku_control_test';
